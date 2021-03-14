@@ -18,7 +18,11 @@ class WeatherViewModel @Inject constructor(private val getWeather: GetWeatherUse
   
   fun getWeatherForLocation(location: String = DEFAULT_CITY_NAME) = executeUseCase {
         getWeather(location)
-            .onSuccess { _viewState.value = Success(it) }
-            .onFailure { _viewState.value = Error(it.throwable) }
+            .onSuccess {
+                setViewState(Success(it))
+            }
+            .onFailure {
+                setViewState(Error(it.throwable))
+            }
       }
 }
