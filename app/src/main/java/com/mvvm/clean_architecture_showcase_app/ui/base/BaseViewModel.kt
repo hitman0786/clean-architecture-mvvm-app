@@ -15,14 +15,24 @@ abstract class BaseViewModel<T : Any, E> : ViewModel() {
   @Inject
   lateinit var connectivity: Connectivity
   
-  protected val _viewState = MutableLiveData<ViewState<T>>()
+  private val _viewState = MutableLiveData<ViewState<T>>()
   val viewState: LiveData<ViewState<T>>
     get() = _viewState
   
-  protected val _viewEffects = MutableLiveData<E>()
+  private val _viewEffects = MutableLiveData<E>()
   val viewEffects: LiveData<E>
     get() = _viewEffects
-  
+
+  //For Main Thread
+  fun setViewState(v: ViewState<T>) {
+    _viewState.value = v
+  }
+
+  //For Background Thread
+  fun setViewStateOnWorkerThread(v: ViewState<T>) {
+    _viewState.postValue(v)
+  }
+
   protected fun executeUseCase(action: suspend () -> Unit, noInternetAction: () -> Unit) {
     _viewState.value = Loading()
     if (connectivity.hasNetworkAccess()) {
@@ -32,7 +42,7 @@ abstract class BaseViewModel<T : Any, E> : ViewModel() {
     }
   }
   
-  protected fun executeUseCase(action: suspend () -> Unit) {
+  fun executeUseCase(action: suspend () -> Unit) {
     _viewState.value = Loading()
     launch { action() }
   }

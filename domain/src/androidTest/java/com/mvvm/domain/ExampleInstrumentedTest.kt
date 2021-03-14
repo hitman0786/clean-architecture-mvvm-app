@@ -1,4 +1,4 @@
-package com.mvvm.domain1
+package com.mvvm.domain
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

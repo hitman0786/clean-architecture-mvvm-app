@@ -2,7 +2,6 @@ package com.mvvm.data.common.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.mvvm.data.common.utils.Connectivity
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton

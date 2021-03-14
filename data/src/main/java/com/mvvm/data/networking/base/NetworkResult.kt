@@ -1,7 +1,7 @@
 package com.mvvm.data.networking.base
 
 import com.mvvm.data.networking.GENERAL_NETWORK_ERROR
-import com.mvvm.domain.base.Result
+import com.mvvm.domain.base.ResultData
 import com.mvvm.domain.base.Failure
 import com.mvvm.domain.base.HttpError
 import com.mvvm.domain.base.Success
@@ -31,7 +31,7 @@ inline fun <T : Any> Response<T>.onFailure(action: (HttpError) -> Unit) {
 
 inline fun <T : RoomMapper<R>, R : DomainMapper<U>, U : Any> Response<T>.getData(
     cacheAction: (R) -> Unit,
-    fetchFromCacheAction: () -> R): Result<U> {
+    fetchFromCacheAction: () -> R): ResultData<U> {
   try {
     onSuccess {
       val databaseEntity = it.mapToRoomEntity()
@@ -51,7 +51,7 @@ inline fun <T : RoomMapper<R>, R : DomainMapper<U>, U : Any> Response<T>.getData
 /**
  * Use this when communicating only with the api service
  */
-fun <T : DomainMapper<R>, R : Any> Response<T>.getData(): Result<R> {
+fun <T : DomainMapper<R>, R : Any> Response<T>.getData(): ResultData<R> {
   try {
     onSuccess { return Success(it.mapToDomainModel()) }
     onFailure { return Failure(it) }

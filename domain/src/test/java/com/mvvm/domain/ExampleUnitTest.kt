@@ -1,4 +1,4 @@
-package com.mvvm.domain1
+package com.mvvm.domain
 
 import org.junit.Test
 
