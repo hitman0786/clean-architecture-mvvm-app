@@ -48,6 +48,7 @@ jobs:
 
 
   static-code-analysis:
+    needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       - name: checkout the code
