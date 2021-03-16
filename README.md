@@ -8,3 +8,10 @@ Data Layer has networking and local database code . Here Retrofit and Room is us
 Presenter has all android specific code with mvvm design.
 
 This project has unit test cases for each layer separately with Junit, Mockito and Robolectric
+
+To gernerate APK file with GITHUB Action
+need to add tag and perform push action such as
+
+git tag v0.1 -a -m "Release v0.1"
+git push --follow-tags
+
