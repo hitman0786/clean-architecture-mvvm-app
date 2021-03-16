@@ -46,18 +46,6 @@ jobs:
           name: app-unit-test-index.html
           path: app/build/reports/tests/testDebugUnitTest/index.html
 
-      - name: Upload html unit test report for data
-        uses: actions/upload-artifact@v2
-        with:
-          name: data-unit-test-index.html
-          path: data/build/reports/tests/testDebugUnitTest/index.html
-
-      - name: Upload html unit test report for domain
-        uses: actions/upload-artifact@v2
-        with:
-          name: domain-unit-test-index.html
-          path: domain/build/reports/tests/testDebugUnitTest/index.html
-
   static-code-analysis:
     needs: [unit-test]
     runs-on: ubuntu-latest
